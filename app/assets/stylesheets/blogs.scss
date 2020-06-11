@@ -1,0 +1,80 @@
+body {
+    margin:0px 25px;
+    padding:0px;
+}
+
+.title {
+  width: 500px;
+  text-align: center;
+  float: center;
+}
+
+.blog_item {
+  width: 350px;
+  background: #CEF9DC;
+  text-align:center;
+  float: center;
+  margin: 10px;
+}
+
+.blog_title {
+    width: 350px;
+    text-align:center;
+    float: center;
+    font-size: 20px;
+}
+
+.blog_body {
+    width: 350px;
+    text-align:center;
+    float: center;
+    font-size: 16px;
+}
+
+.body {
+    background: #CEF9DC;
+    float: center;
+}
+
+.page_left{
+    width: 50%;
+    float: left;
+}
+.page_right{
+    width: 50%;
+    float: right;
+}
+
+.registry_title{
+    width: 670px;
+    height: 30px;
+}
+
+.registry_context{
+    width: 670px;
+    height: 700px;
+}
+
+.space{
+    height: 20px;
+}
+.username{
+    width: 200px;
+    height: 25px;
+}
+.email{
+    width: 350px;
+    height: 25px;
+}
+.password{
+    width: 200px;
+    height: 25px;
+}
+.edit_title{
+    width: 670px;
+    height: 30px;
+}
+.edit_context{
+    width: 670px;
+    height: 700px;
+}

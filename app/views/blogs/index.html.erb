@@ -1,0 +1,22 @@
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="blogs.scss" type="text/css">
+</head>
+<body>
+    <%= flash[:success] %>
+    <h1 class="title">ブログ記事一覧</h1>
+    <%=  %>
+    <div class="page_left">
+        <% @blogs.each do |blogs| %>
+            <div class="blog_item">
+                <%= link_to "#{blogs.title}",blog_path(:id => "#{blogs.id}") %>
+            </div><br>
+        <% end %>
+    </div>
+    <div class="page_right">
+            <p>ログイン:<%= params[:login_user] %>様 </p>
+            <div class="new_blog">
+                <%= link_to "新規記事登録",new_blog_path %>
+            </div>
+    </div>
+</body>

@@ -1,0 +1,41 @@
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="blogs.scss" type="text/css">
+    <script>
+    var checkForm = function(){
+        var title = document.blog_registry.title.value
+        var body = document.blog_registry.content.value
+        if (title.length == 0){
+            alert("タイトルを入力してください");
+            return false;
+        }else if(body.length == 0){
+            alert("本文を入力してください");
+            return false;
+        }else if(title.length < 3 || title.length > 30){
+            alert("タイトルは3字以上30字以内で入力してください");
+            return false;
+        }else{
+            document.blog_registry.submit();
+        }
+    }
+    </script>
+</head>
+<body>
+    <%= flash[:danger] %>
+    <h1 class="title">新規記事登録</h1>
+    <form name="blog_registry" action="/blogs" method="post" >
+    <div>
+        <td>タイトル</td><br>
+        <input class="registry_title" type="text" name="title"/>
+    </div>
+    <div class="space"></div>
+    <div>
+        <td>本文</td><br>
+        <input class="registry_context" type="text" name="content"/>
+    </div>
+    </div>
+    <p>
+      <input type="button" value="登録" onclick="checkForm()">
+    </p>
+    <%= link_to "戻る",blogs_path %>
+    </form>
