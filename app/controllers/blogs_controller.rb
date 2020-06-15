@@ -10,7 +10,8 @@ class BlogsController < ApplicationController
         @blog = Blog.new(params.permit(:title, :content))
         if @blog.save
             flash.now[:success] = '記事を登録しました'
-            redirect_to action: :show, id: Blog.find_by(title: params[title]).id
+            @id = Blog.find_by(title: params[:title]).id
+            redirect_to action: :show, id: @id
         else
             flash.now[:danger]  = '記事の登録に失敗しました'
             render :new

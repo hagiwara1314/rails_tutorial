@@ -1,29 +1,17 @@
 <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="blogs.scss" type="text/css">
 </head>
 <body>
     <%= flash[:success] %>
-    <h1 class="title">ブログ記事一覧</h1>
-    <div class="page_left">
+    <h1>ブログ記事一覧</h1>
         <% @blogs.each do |blogs| %>
-            <div class="blog_item">
-                <%= link_to "#{blogs.title}",blog_path(:id => "#{blogs.id}") %>
-            </div><br>
+                <%= link_to "#{blogs.title}",blog_path(:id => "#{blogs.id}") %><br>
         <% end %>
-    </div>
-    <div class="page_right">
         <% if user_signed_in? %>
-            <p>ログイン:<%= params[:login_user] %>様 </p>
-            <div class="new_blog">
-                <%= link_to "新規記事登録", new_blog_path %>
-            </div>
+            <p>ログイン:<%= current_user.email %>様 </p>
+            <%= link_to "新規記事登録", new_blog_path, class:"btn btn-primary" %>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: {confirm: "ログアウトしますか？"}, class:"btn btn-primary" %>
         <% else %>
-            <%= link_to "ログイン", new_user_session_path %>
-            <%= link_to "ユーザー登録", new_user_registration_path %>
+            <%= link_to "ログイン", new_user_session_path, class:"btn btn-primary"%>
+            <%= link_to "ユーザー登録", new_user_registration_path, class:"btn btn-primary"%>
         <% end %>
-        <div class="new_blog">
-            <%= link_to "新規記事登録", new_blog_path %>
-        </div>
-    </div>
 </body>

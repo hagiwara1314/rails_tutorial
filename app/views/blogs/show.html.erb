@@ -1,17 +1,12 @@
 <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="blogs.scss" type="text/css">
+
 </head>
-<body class ="body">
+<body>
     <%= flash[:success] %>
-    <h1 class="title">ブログ記事詳細</h1>
-    <p class="blog_title"><%= @blog.title %></p><br>
-    <p class="blog_body"><%= @blog.content %></p>
-    <div class="page_left">
-        <%= link_to "戻る",blogs_path %>
-    </div>
-    <div class="page_right">
-        <%= link_to "編集",edit_blog_path %><br>
-        <%= link_to "削除",blog_path ,method: :delete, data: {confirm: "この記事を削除しますか？"} %>
-    </div>
+    <h1>ブログ記事詳細</h1>
+    <p><%= @blog.title %></p><br>
+    <p><%= @blog.content %></p>
+    <%= link_to "戻る",blogs_path %>
+    <%= link_to "編集",edit_blog_path %><br>
+    <%= link_to "削除",blog_path ,method: :delete, data: {confirm: "この記事を削除しますか？"} %>
 </body>

@@ -7,6 +7,7 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+require('bootstrap/dist/js/bootstrap.min.js')
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -18,3 +19,8 @@ require("channels")
 
 import '../stylesheets/application'
 import './bootstrap_custom.js'
+
+import 'jquery/dist/jquery.js'
+import 'popper.js/dist/popper.js'
+import 'bootstrap/dist/js/bootstrap'
+import 'bootstrap/dist/css/bootstrap.css'

@@ -1,6 +1,5 @@
 <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="blogs.scss" type="text/css">
+
     <script>
     var submit = function(){
         document.blog_registry.submit();
@@ -9,20 +8,13 @@
 </head>
 <body>
     <%= flash[:danger] %>
-    <h1 class="title">新規記事登録</h1>
+    <h1>新規記事登録</h1>
     <form name="blog_registry" action="/blogs" method="post" >
-    <div>
         <td>タイトル</td><br>
-        <input class="registry_title" type="text" name="title"/>
-    </div>
-    <div class="space"></div>
-    <div>
+        <input type="text" name="title"/>
         <td>本文</td><br>
-        <input class="registry_context" type="text" name="content"/>
-    </div>
-    </div>
-    <p>
-      <input type="button" value="登録" onclick="submit()">
-    </p>
+        <input type="text" name="content"/>
+        <input type="button" value="登録" onclick="submit()">
     <%= link_to "戻る",blogs_path %>
     </form>
+</body>
