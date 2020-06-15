@@ -56,3 +56,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #Devise
 source 'https://rubygems.org'
 gem 'devise'
+
+gem 'devise-i18n'
+gem 'devise-i18n-views'
+

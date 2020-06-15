@@ -2,21 +2,8 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="blogs.scss" type="text/css">
     <script>
-    var checkForm = function(){
-        var title = document.blog_registry.title.value
-        var body = document.blog_registry.content.value
-        if (title.length == 0){
-            alert("タイトルを入力してください");
-            return false;
-        }else if(body.length == 0){
-            alert("本文を入力してください");
-            return false;
-        }else if(title.length < 3 || title.length > 30){
-            alert("タイトルは3字以上30字以内で入力してください");
-            return false;
-        }else{
-            document.blog_registry.submit();
-        }
+    var submit = function(){
+        document.blog_registry.submit();
     }
     </script>
 </head>
@@ -35,7 +22,7 @@
     </div>
     </div>
     <p>
-      <input type="button" value="登録" onclick="checkForm()">
+      <input type="button" value="登録" onclick="submit()">
     </p>
     <%= link_to "戻る",blogs_path %>
     </form>

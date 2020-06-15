@@ -5,8 +5,8 @@
 <body class ="body">
     <%= flash[:success] %>
     <h1 class="title">ブログ記事詳細</h1>
-    <p class="blog_title"><%= @article.title %></p><br>
-    <p class="blog_body"><%= @article.content %></p>
+    <p class="blog_title"><%= @blog.title %></p><br>
+    <p class="blog_body"><%= @blog.content %></p>
     <div class="page_left">
         <%= link_to "戻る",blogs_path %>
     </div>

@@ -5,7 +5,6 @@
 <body>
     <%= flash[:success] %>
     <h1 class="title">ブログ記事一覧</h1>
-    <%=  %>
     <div class="page_left">
         <% @blogs.each do |blogs| %>
             <div class="blog_item">
@@ -14,9 +13,17 @@
         <% end %>
     </div>
     <div class="page_right">
+        <% if user_signed_in? %>
             <p>ログイン:<%= params[:login_user] %>様 </p>
             <div class="new_blog">
-                <%= link_to "新規記事登録",new_blog_path %>
+                <%= link_to "新規記事登録", new_blog_path %>
             </div>
+        <% else %>
+            <%= link_to "ログイン", new_user_session_path %>
+            <%= link_to "ユーザー登録", new_user_registration_path %>
+        <% end %>
+        <div class="new_blog">
+            <%= link_to "新規記事登録", new_blog_path %>
+        </div>
     </div>
 </body>
