@@ -1,17 +1,102 @@
 <head>
+<style type="text/css">
+.jumbotron { 
+    background:url('assets/Desert 2.jpg') 
+    center no-repeat; 
+    background-size: cover;
+}
+header .container {
+    margin-top: 13%;
+}
+.nav-link {
+    color: rgba(0, 0, 0, 0.5);
+}
+.nav-link:hover {
+    color: rgba(0, 0, 0, 0.8);
+}
+.title_link {
+    color: rgba(0, 0, 0, 1);
+    font-size: 3rem;
+    text-decoration: none;
+    transition: all  0.3s ease;
+}
+.title_link:hover {
+    color: #008080;
+    text-decoration: none; 
+}
+</style>
+</head>
 </head>
 <body>
-    <%= flash[:success] %>
-    <h1>ブログ記事一覧</h1>
-        <% @blogs.each do |blogs| %>
-                <%= link_to "#{blogs.title}",blog_path(:id => "#{blogs.id}") %><br>
-        <% end %>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
         <% if user_signed_in? %>
-            <p>ログイン:<%= current_user.email %>様 </p>
-            <%= link_to "新規記事登録", new_blog_path, class:"btn btn-primary" %>
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: {confirm: "ログアウトしますか？"}, class:"btn btn-primary" %>
+            <a class="navbar-brand">ようこそ <%= current_user.username %> 様</a>
+            <div class="nav-item">
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: {confirm: "ログアウトしますか？"}, class: "nav-link" %>
+            </div>
         <% else %>
-            <%= link_to "ログイン", new_user_session_path, class:"btn btn-primary"%>
-            <%= link_to "ユーザー登録", new_user_registration_path, class:"btn btn-primary"%>
+            <div class="nav-item">
+                <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
+            </div>
+            <div class="nav-item">
+                <%= link_to "ユーザー登録", new_user_registration_path, class: "nav-link" %>
+            </div>
         <% end %>
+        <%= flash[:success]%>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            メニュー
+            <i class="fas fa-bars"></i>
+        </button>
+        <% if user_signed_in? %>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <%= link_to "投稿記事一覧", blogs_path, class: "nav-link" %>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">記事検索</a>
+                    </li>
+                    <li class="nav-item">
+                        <%= link_to "記事投稿", new_blog_path, class: "nav-link" %>
+                    </li>
+                </ul>
+            </div>
+        <% else %>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <%= link_to "投稿記事一覧", blogs_path, class: "nav-link" %>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">記事検索</a>
+                    </li>
+                </ul>
+            </div>
+        <% end %>
+    </div>
+    </nav>
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h1 style="color: #EEEEEE;　margin: 10px auto; text-align: center;">Rails Tutorial</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+    <% @blogs.each do |blogs| %>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="border-bottom" style="padding-bottom: 10px;">
+                    <%= link_to "#{blogs.title}",blog_path(:id => "#{blogs.id}") ,class: "title_link" %><br>
+                    <p style="color: rgba(0, 0, 0, 0.5);">
+                       による <%= blogs.created_at %>　の投稿
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% end %>
 </body>
