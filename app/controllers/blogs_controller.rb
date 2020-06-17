@@ -7,7 +7,7 @@ class BlogsController < ApplicationController
     end
 
     def create
-        @blog = Blog.new(params.permit(:title, :content))
+        @blog = Blog.new(params.permit(:title, :content, :create_user))
         if @blog.save
             flash.now[:success] = '記事を登録しました'
             @id = Blog.find_by(title: params[:title]).id

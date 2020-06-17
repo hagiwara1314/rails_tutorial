@@ -10,6 +10,7 @@
     <h1>記事編集</h1>
     <form name="blog_edit" action="/blogs/<%= @blog.id %>" method="post">
     <input type="hidden" name="_method" value="patch" />
+    <input type="hidden" name="create_user" value= <%= current_user.username %> >
         <td>タイトル</td><br>
         <input type="text" name="title" value= <%= @blog.title %> /><br>
         <td>本文</td><br>

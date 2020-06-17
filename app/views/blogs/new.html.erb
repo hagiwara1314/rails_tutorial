@@ -10,6 +10,7 @@
     <%= flash[:danger] %>
     <h1>新規記事登録</h1>
     <form name="blog_registry" action="/blogs" method="post" >
+    <input type="hidden" name="create_user" value= <%= current_user.username %> >
         <td>タイトル</td><br>
         <input type="text" name="title"/>
         <td>本文</td><br>

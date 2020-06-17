@@ -1,7 +1,7 @@
 <head>
 <style type="text/css">
 .jumbotron { 
-    background:url('assets/Desert 2.jpg') 
+    background:url("<%= asset_path('Desert 2.jpg') %>") 
     center no-repeat; 
     background-size: cover;
 }
@@ -9,10 +9,16 @@ header .container {
     margin-top: 13%;
 }
 .nav-link {
-    color: rgba(0, 0, 0, 0.5);
+    color: #fff;
 }
 .nav-link:hover {
-    color: rgba(0, 0, 0, 0.8);
+    color: rgba(255, 255, 255, 0.8);
+}
+.navbar-light .navbar-nav .nav-link {
+    color: #888888;
+}
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+    color: rgba(136, 136, 136, 0.8);
 }
 .title_link {
     color: rgba(0, 0, 0, 1);
@@ -26,12 +32,12 @@ header .container {
 }
 </style>
 </head>
-</head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <%= flash[:success]%>
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark" id="mainNav">
     <div class="container">
         <% if user_signed_in? %>
-            <a class="navbar-brand">ようこそ <%= current_user.username %> 様</a>
+            <a class="navbar-brand" style="color: #fff">ログイン:<%= current_user.username %> </a>
             <div class="nav-item">
                 <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: {confirm: "ログアウトしますか？"}, class: "nav-link" %>
             </div>
@@ -43,10 +49,8 @@ header .container {
                 <%= link_to "ユーザー登録", new_user_registration_path, class: "nav-link" %>
             </div>
         <% end %>
-        <%= flash[:success]%>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" style="color: #fff;">
             メニュー
-            <i class="fas fa-bars"></i>
         </button>
         <% if user_signed_in? %>
             <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -76,7 +80,7 @@ header .container {
         <% end %>
     </div>
     </nav>
-    <header class="jumbotron">
+    <header class="jumbotron jumbotron-fluid">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mx-auto">
@@ -89,10 +93,10 @@ header .container {
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
-                <div class="border-bottom" style="padding-bottom: 10px;">
+                <div class="border-bottom" style="padding: 10px;">
                     <%= link_to "#{blogs.title}",blog_path(:id => "#{blogs.id}") ,class: "title_link" %><br>
                     <p style="color: rgba(0, 0, 0, 0.5);">
-                       による <%= blogs.created_at %>　の投稿
+                    <%= blogs.create_user %> が <%= blogs.created_at.strftime('%Y年%m月%d日') %>に投稿(最終更新日:<%= blogs.updated_at.strftime('%Y年%m月%d日') %>)
                     </p>
                 </div>
             </div>
