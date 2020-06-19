@@ -6,19 +6,13 @@
     background-size: cover;
 }
 header .container {
-    margin-top: 13%;
+    margin-top: 8%;
 }
-.nav-link {
-    color: #fff;
-}
-.nav-link:hover {
-    color: rgba(255, 255, 255, 0.8);
-}
-.navbar-light .navbar-nav .nav-link {
-    color: #888888;
-}
-.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
-    color: rgba(136, 136, 136, 0.8);
+.blog_name {
+    color: #EEEEEE;
+    margin: 10px auto;
+    text-align: center;
+    font-size: 3rem;
 }
 .title_link {
     color: rgba(0, 0, 0, 1);
@@ -34,64 +28,18 @@ header .container {
 </head>
 <body>
     <%= flash[:success]%>
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark" id="mainNav">
-    <div class="container">
-        <% if user_signed_in? %>
-            <a class="navbar-brand" style="color: #fff">ログイン:<%= current_user.username %> </a>
-            <div class="nav-item">
-                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: {confirm: "ログアウトしますか？"}, class: "nav-link" %>
-            </div>
-        <% else %>
-            <div class="nav-item">
-                <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
-            </div>
-            <div class="nav-item">
-                <%= link_to "ユーザー登録", new_user_registration_path, class: "nav-link" %>
-            </div>
-        <% end %>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" style="color: #fff;">
-            メニュー
-        </button>
-        <% if user_signed_in? %>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <%= link_to "投稿記事一覧", blogs_path, class: "nav-link" %>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link">記事検索</a>
-                    </li>
-                    <li class="nav-item">
-                        <%= link_to "記事投稿", new_blog_path, class: "nav-link" %>
-                    </li>
-                </ul>
-            </div>
-        <% else %>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <%= link_to "投稿記事一覧", blogs_path, class: "nav-link" %>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link">記事検索</a>
-                    </li>
-                </ul>
-            </div>
-        <% end %>
-    </div>
-    </nav>
     <header class="jumbotron jumbotron-fluid">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mx-auto">
-                    <h1 style="color: #EEEEEE;　margin: 10px auto; text-align: center;">Rails Tutorial</h1>
+                    <h1 class="blog_name">Rails Tutorial</h1>
                 </div>
             </div>
         </div>
     </header>
-    <% @blogs.each do |blogs| %>
     <div class="container">
         <div class="row">
+            <% @blogs.each do |blogs| %>
             <div class="col-lg-8 mx-auto">
                 <div class="border-bottom" style="padding: 10px;">
                     <%= link_to "#{blogs.title}",blog_path(:id => "#{blogs.id}") ,class: "title_link" %><br>
@@ -100,7 +48,12 @@ header .container {
                     </p>
                 </div>
             </div>
+            <% end %>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <%= paginate @blogs %>
+            </div>
         </div>
     </div>
-    <% end %>
 </body>

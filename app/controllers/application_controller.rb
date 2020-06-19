@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
     before_action :configure_permitted_parameters, if: :devise_controller?
     before_action :blog_data, unless: :devise_controller?, only:[:show, :edit, :update, :destroy]
+    before_action :set_search, unless: :devise_controller?
     protect_from_forgery
 
     private
@@ -15,4 +16,12 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
       devise_parameter_sanitizer.permit :account_update, keys: added_attrs
     end
-end
+
+    def set_search
+      if params[:q] != nil
+        params[:q]['title_or_content_or_create_user_cont_all'] = params[:q]['title_or_content_or_create_user_cont_all'].split(/[\p{blank}\s]+/)
+      end
+      @search = Blog.ransack(params[:q])
+      @result = @search.result(distinct: true).page(params[:page]).per(10)
+    end
+  end

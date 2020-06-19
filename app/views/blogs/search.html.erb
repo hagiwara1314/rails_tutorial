@@ -1,0 +1,95 @@
+<head>
+<style type="text/css">
+.jumbotron { 
+    background:url("<%= asset_path('El Capitan.jpg') %>") 
+    center no-repeat; 
+    background-size: cover;
+}
+header .container {
+    background: rgba(255, 255, 255, 0.5);
+}
+.title_link {
+    color: rgba(0, 0, 0, 1);
+    font-size: 3rem;
+    text-decoration: none;
+    transition: all  0.3s ease;
+}
+.title_link:hover {
+    color: #008080;
+    text-decoration: none; 
+}
+</style>
+<script>
+var submit = function(){
+    document.blog_date_search.submit();
+}
+</script>
+</head>
+<body>
+    <header class="jumbotron jumbotron-fluid">
+        <div class="container add-color default-container">
+            <h1 class="text-dark text-center" >日付検索</h1>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <form name="blog_date_search" action="/blogs/search" method="get">
+                        <input type="hidden" name="search_type" value="date">
+                        <div class="text-center" style="padding-bottom: 10px;">
+                            <div class="col-lg-10 btn-group" data-toggle="buttons">
+                                <div class="btn btn-outline-secondary active">
+                                    <label for="target_column">指定なし</label>
+                                    <input type="radio" name="target_column" id="target_column" checked="checked" value="" class="invisible">
+                                </div>
+                                <div class="btn btn-outline-secondary">
+                                    <label for="target_column">投稿日</label>
+                                    <input type="radio" name="target_column" id="target_column" value="created_at" class="invisible">
+                                </div>
+                                <div class="btn btn-outline-secondary">
+                                    <label for="target_column">最終更新日</label>
+                                    <input type="radio" name="target_column" id="target_column" value="updated_at" class="invisible">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-10 mx-auto">
+                            <p>
+                                <label for="from" style="font-size: 1.5rem;">from</label>
+                                <input type="date" name="from" id="from">
+                            </p>
+                        </div>
+                        <div class="col-lg-10 mx-auto">
+                            <p>
+                                <label for="to" style="font-size: 1.5rem;">to</label>
+                                <input type="date" name="to" id="to">
+                            </p>
+                        </div>
+                        <div class="col-lg-10 mx-auto">
+                            <div class="text-right">
+                                <input type="button" value="検索" onclick="submit()" class="btn btn-dark btn-sm btn-outline-light" style="margin-bottom: 10px;" >
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+    <% if params[:search_type] == 'date'%>
+        <div class="container">
+            <div class="row">
+                <% @ResultDate.each do |blogs| %>
+                <div class="col-lg-8 mx-auto">
+                    <div class="border-bottom" style="padding: 10px;">
+                        <%= link_to "#{blogs.title}",blog_path(:id => "#{blogs.id}") ,class: "title_link" %><br>
+                        <p style="color: rgba(0, 0, 0, 0.5);">
+                        <%= blogs.create_user %> が <%= blogs.created_at.strftime('%Y年%m月%d日') %>に投稿(最終更新日:<%= blogs.updated_at.strftime('%Y年%m月%d日') %>)
+                        </p>
+                    </div>
+                </div>
+                <% end %>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <%= paginate @ResultDate %>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</body>

@@ -1,9 +1,14 @@
 class BlogsController < ApplicationController
     def index
-        @blogs = Blog.all.order("id DESC")
+        if params[:search_type] == 'date'
+            redirect_to action: :search
+        else
+            @blogs = @result.order("id DESC")
+        end
     end
 
     def new
+        @username = current_user.username
     end
 
     def create
@@ -38,5 +43,28 @@ class BlogsController < ApplicationController
         @blog.destroy
         flash.now[:success] = '記事を削除しました'
         redirect_to blogs_path   
+    end
+
+    def search
+        if params[:search_type] == 'date'
+            if params[:target_column] == ''
+                params[:q] = {
+                    'created_at_or_updated_at_gteq' => params[:from],
+                    'created_at_or_updated_at_lteq' => params[:to]
+                }
+            elsif params[:target_column] == 'created_at'
+                params[:q] = {
+                    'created_at_gteq' => params[:from],
+                    'created_at_lteq' => params[:to]
+                }
+            elsif params[:target_column] == 'updated_at'
+                params[:q] = {
+                    'updated_at_gteq' => params[:from],
+                    'updated_at_lteq' => params[:to]
+                }
+            end
+        end
+        @SearchDate = Blog.ransack(params[:q])
+        @ResultDate = @SearchDate.result(distinct: true).order("id DESC").page(params[:page]).per(10)
     end
 end
