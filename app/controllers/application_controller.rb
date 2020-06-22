@@ -1,13 +1,9 @@
 class ApplicationController < ActionController::Base
     before_action :configure_permitted_parameters, if: :devise_controller?
-    before_action :blog_data, unless: :devise_controller?, only:[:show, :edit, :update, :destroy]
     before_action :set_search, unless: :devise_controller?
+
     protect_from_forgery
 
-    private
-    def blog_data
-      @blog = Blog.find(params[:id])
-    end
       
     protected
 

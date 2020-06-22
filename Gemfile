@@ -63,3 +63,5 @@ gem 'devise-i18n-views'
 gem 'ransack'
 
 gem 'kaminari'
+
+gem 'pry-rails'

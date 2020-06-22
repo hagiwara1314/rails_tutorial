@@ -25,6 +25,11 @@ header .container {
     text-decoration: none; 
 }
 </style>
+<script>
+var submit = function(){
+    document.blog_registry.submit();
+}
+</script>
 </head>
 <body>
     <%= flash[:success]%>
@@ -51,7 +56,45 @@ header .container {
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
-                <p style="font-size: 1.5rem;"><%= @blog.content %></p>
+                <div class="border-bottom" style="padding: 10px; margin: 10px;">
+                    <p style="font-size: 1.5rem;"><%= @blog.content %></p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="text-dark text-center" style="font-size: 2rem;">
+                    コメント
+                    <%= flash[:danger]%>
+                </div>
+                <% @comments.each do |comment| %>
+                    <div class="border-bottom">
+                        <strong><%= comment.user.username %></strong>
+                        <div style="margin: 10px;">
+                            <%= comment.content %>
+                        </div>
+                        <div style="padding: 10px;">
+                            <div class="text-right">
+                                <% if user_signed_in? && comment.user == current_user %>
+                                    <%= link_to '削除', comment_path(comment), method: :delete %>
+                                <% elsif user_signed_in? && "#{@blog.create_user}" ==  "#{current_user.username}" %>
+                                    <%= link_to '削除', comment_path(comment), method: :delete %>
+                                <% end %>
+                            </div>
+                            <div class="text-right">
+                                <%= comment.created_at.strftime('%Y/%m/%d/ %H:%M') %>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+            <% if user_signed_in? %>
+                <form name="comment" action="/comments" method="post">
+                    <input type="hidden" name="user_id" value= <%= current_user.id %>>
+                    <input type="hidden" name="blog_id" value= <%= @blog.id %> >
+                    <input type="text" name="content">
+                    <input type="button" value="登録" onclick="submit()">
+                </form>
+            <% end %>
             </div>
         </div>
     </div>

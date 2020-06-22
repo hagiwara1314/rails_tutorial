@@ -1,4 +1,9 @@
 class BlogsController < ApplicationController
+    before_action :blog_data, only:[:show, :edit, :update, :destroy]
+    def blog_data
+        @blog = Blog.find(params[:id])
+    end
+
     def index
         if params[:search_type] == 'date'
             redirect_to action: :search
@@ -24,6 +29,8 @@ class BlogsController < ApplicationController
     end
 
     def show
+        @comments = @blog.comments.includes(:user).all
+        @comment  = @blog.comments.build(user_id: current_user.id) if current_user
     end
 
     def edit
