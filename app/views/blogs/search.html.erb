@@ -33,32 +33,68 @@ var submit = function(){
                 <div class="col-lg-8 mx-auto">
                     <form name="blog_date_search" action="/blogs/search" method="get">
                         <input type="hidden" name="search_type" value="date">
-                        <div class="text-center" style="padding-bottom: 10px;">
-                            <div class="col-lg-10 btn-group" data-toggle="buttons">
-                                <div class="btn btn-outline-secondary active">
-                                    <label for="target_column">指定なし</label>
-                                    <input type="radio" name="target_column" id="target_column" checked="checked" value="" class="invisible">
-                                </div>
-                                <div class="btn btn-outline-secondary">
-                                    <label for="target_column">投稿日</label>
-                                    <input type="radio" name="target_column" id="target_column" value="created_at" class="invisible">
-                                </div>
-                                <div class="btn btn-outline-secondary">
-                                    <label for="target_column">最終更新日</label>
-                                    <input type="radio" name="target_column" id="target_column" value="updated_at" class="invisible">
+                        <% if params[:target_column] == "created_at" %>
+                            <div class="text-center" style="padding-bottom: 10px;">
+                                <div class="col-lg-10 btn-group" data-toggle="buttons">
+                                    <div class="btn btn-outline-secondary">
+                                        <label for="target_column">指定なし</label>
+                                        <input type="radio" name="target_column" id="target_column" value="" class="invisible">
+                                    </div>
+                                    <div class="btn btn-outline-secondary active">
+                                        <label for="target_column">投稿日</label>
+                                        <input type="radio" name="target_column" id="target_column" checked="checked" value="created_at" class="invisible">
+                                    </div>
+                                    <div class="btn btn-outline-secondary">
+                                        <label for="target_column">最終更新日</label>
+                                        <input type="radio" name="target_column" id="target_column" value="updated_at" class="invisible">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        <% elsif params[:target_column] == "updated_at" %>
+                            <div class="text-center" style="padding-bottom: 10px;">
+                                <div class="col-lg-10 btn-group" data-toggle="buttons">
+                                    <div class="btn btn-outline-secondary">
+                                        <label for="target_column">指定なし</label>
+                                        <input type="radio" name="target_column" id="target_column" value="" class="invisible">
+                                    </div>
+                                    <div class="btn btn-outline-secondary">
+                                        <label for="target_column">投稿日</label>
+                                        <input type="radio" name="target_column" id="target_column" value="created_at" class="invisible">
+                                    </div>
+                                    <div class="btn btn-outline-secondary  active">
+                                        <label for="target_column">最終更新日</label>
+                                        <input type="radio" name="target_column" id="target_column" checked="checked" value="updated_at" class="invisible">
+                                    </div>
+                                </div>
+                            </div>
+                        <% else %>
+                            <div class="text-center" style="padding-bottom: 10px;">
+                                <div class="col-lg-10 btn-group" data-toggle="buttons">
+                                    <div class="btn btn-outline-secondary active">
+                                        <label for="target_column">指定なし</label>
+                                        <input type="radio" name="target_column" id="target_column" checked="checked" value="" class="invisible">
+                                    </div>
+                                    <div class="btn btn-outline-secondary">
+                                        <label for="target_column">投稿日</label>
+                                        <input type="radio" name="target_column" id="target_column" value="created_at" class="invisible">
+                                    </div>
+                                    <div class="btn btn-outline-secondary">
+                                        <label for="target_column">最終更新日</label>
+                                        <input type="radio" name="target_column" id="target_column" value="updated_at" class="invisible">
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
                         <div class="col-lg-10 mx-auto">
                             <p>
                                 <label for="from" style="font-size: 1.5rem;">from</label>
-                                <input type="date" name="from" id="from">
+                                <input type="date" name="from" id="from"　value= <%= params[:from] %> >
                             </p>
                         </div>
                         <div class="col-lg-10 mx-auto">
                             <p>
                                 <label for="to" style="font-size: 1.5rem;">to</label>
-                                <input type="date" name="to" id="to">
+                                <input type="date" name="to" id="to" value= <%= params[:to] %> >
                             </p>
                         </div>
                         <div class="col-lg-10 mx-auto">
