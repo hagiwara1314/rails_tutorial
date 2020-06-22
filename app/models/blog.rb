@@ -4,4 +4,5 @@ class Blog < ApplicationRecord
     validates :title, length: { maximum: 30 }
     validates :title, uniqueness: true
     validates :content, presence: true
+    has_many :comments
 end

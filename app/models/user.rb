@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :authentication_keys => [:email] 
   validates :username, presence: true
   validates :username, uniqueness: true
+  has_many :comments
 end

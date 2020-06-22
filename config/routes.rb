@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   root to: "blogs#index"
   get 'blogs/search', to: "blogs#search", as: 'blog_search'
   resources :blogs
+  resources :comments, only: [:create]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
